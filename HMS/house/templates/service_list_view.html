@@ -1,0 +1,84 @@
+{% extends "navber.html" %} {% block content %} {% load static %}
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #343a40;
+      }
+
+      h1#brand {
+        text-align: center;
+        margin: 20px 0;
+        color: #007bff;
+      }
+
+      /* Container for services */
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      /* Individual service card */
+      .service {
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin: 10px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+      }
+
+      .service:hover {
+        transform: translateY(-5px);
+      }
+
+      .service img {
+        width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      .service h2 {
+        text-align: center;
+        padding: 15px;
+        color: #007bff;
+      }
+
+      /* Link styles */
+      .service a {
+        text-decoration: none;
+        color: inherit;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Housing Society Management System</title>
+    <!-- Main StyleSheet -->
+  </head>
+
+  <body>
+    <h1 id="brand">Housing Society Management System</h1>
+    <div class="container">
+      {% for service_category, service_url in service_list %}
+      <div class="service">
+        <a href="{{service_url}}">
+          <img
+            src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            alt=""
+          />
+          <h2>{{service_category}}</h2>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
+
+{%endblock%}

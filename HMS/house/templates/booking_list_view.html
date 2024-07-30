@@ -1,0 +1,177 @@
+{% extends "navber.html" %} {% block content %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* styles.css */
+
+      /* General styles */
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        color: #333;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1#brand {
+        text-align: center;
+        margin: 20px 0;
+        color: #0066cc;
+      }
+
+      /* Header styles */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #0066cc;
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header .headings h1,
+      .header .headings h2 {
+        margin: 0;
+        padding: 5px 0;
+      }
+
+      .header .home a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .header .home a:hover {
+        text-decoration: underline;
+      }
+
+      /* Container for services and bookings */
+      .container,
+      .bookings {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      /* Individual service/booking card */
+      .service,
+      .booking {
+        background-color: #fff;
+        border: none;
+        border-radius: 12px;
+        margin: 15px;
+        width: 280px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        overflow: hidden;
+      }
+
+      .service:hover,
+      .booking:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .service img,
+      .booking img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .service h2,
+      .booking h2,
+      .booking h3 {
+        text-align: center;
+        padding: 15px;
+        color: #0066cc;
+      }
+
+      .service h2 {
+        font-size: 24px;
+      }
+
+      .booking h2,
+      .booking h3 {
+        font-size: 20px;
+      }
+
+      .booking .cancel a {
+        display: block;
+        text-align: center;
+        padding: 15px;
+        color: #dc3545;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .booking .cancel a:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <script
+      src="https://kit.fontawesome.com/692189991f.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="header">
+        <div class="headings">
+          <h1>Your Bookings</h1>
+          <h2>Welcome dear {{user}}</h2>
+        </div>
+        <div class="home">
+          <a href="{% url 'house:ServiceListView' %}"
+            ><i class="fas fa-arrow-alt-circle-left"></i> Home</a
+          >
+        </div>
+      </div>
+
+      <div class="bookings">
+        {% for booking in booking_list %}
+        <div class="booking">
+          <img
+            src="https://images.unsplash.com/photo-1560067174-c5a3a8f37060?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+            alt=""
+          />
+          <div class="category">
+            <h2>{{booking.get_service_catagory}}</h2>
+          </div>
+          <div class="from">
+            <h3>From: {{booking.check_in}}</h3>
+          </div>
+          <div class="to">
+            <h3>To: {{booking.check_out}}</h3>
+          </div>
+          <div class="capacity">
+            <h3>Capacity: {{booking.service.capacity}}</h3>
+          </div>
+          <div class="cancel">
+            <a href="{{booking.get_cancel_booking_url}}" class="invisible"
+              ><i class="far fa-2x fa-times-circle"></i> Cancel Booking</a
+            >
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}
